@@ -31,6 +31,57 @@ REST API (Go)
   │
   └── PostgreSQL (Persistent Storage)
 ```
+🛠️ Requirements
+
+Before running the project, ensure you have:
+
+Go >= 1.18
+
+Redis installed and running
+
+PostgreSQL database set up
+
+git installed
+
+💻 Getting Started
+
+1️⃣ Clone the repo
+```
+git clone https://github.com/Om20An00/go-url-shortener.git
+cd go-url-shortener
+```
+2️⃣ Configure environment variables
+```
+Create a .env file (or configure config.yaml) with database and Redis details:
+
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=your_postgres_user
+DB_PASSWORD=your_postgres_password
+DB_NAME=url_shortener
+REDIS_HOST=localhost
+REDIS_PORT=6379
+```
+
+
+3️⃣ Run the service
+```
+go run main.go
+```
+
+The API will start on http://localhost:8080 🚀
+
+4️⃣ Test API Endpoints
+
+Example using curl:
+```
+# Shorten a URL
+curl -X POST http://localhost:8080/shorten -H "Content-Type: application/json" -d '{"url":"https://example.com"}'
+
+# Redirect a short URL
+curl http://localhost:8080/<short-code>
+
+```
 ⚙️ Tech Stack
 Layer	Technology
 Language	Go (Golang)
