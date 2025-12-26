@@ -6,7 +6,7 @@ Go URL Shortener is a production-ready backend service designed to generate, sto
 
 The system follows clean architecture principles 🧩, leverages Redis ⚡ for high-speed caching, PostgreSQL 🗄️ for reliable persistence, and exposes a RESTful API 🌐 built in Go for maximum performance and scalability
 
-🧠 Key Highlights (Recruiter Focused)
+🧠 Key Highlights 
 
 ⚡ High Performance: Built with Go for efficient concurrency and fast request handling
 
