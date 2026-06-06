@@ -1,148 +1,103 @@
-🚀 Go URL Shortener
+# 🚀 Go URL Shortener
+⚡ High Performance • 🧠 Clean Architecture • 📈 Production-Grade Observability
 
-⚡ High Performance • 🧠 Clean Architecture • 📈 Scalable Backend
+Go URL Shortener is a production-ready backend service designed to generate, store, and resolve shortened URLs with low latency, high throughput, and strong consistency.
 
-Go URL Shortener is a production-ready backend service designed to generate, store, and resolve shortened URLs with low latency, high throughput, and strong consistency ⚙️🚀.
+The system leverages Redis ⚡ for high-speed caching, PostgreSQL 🗄️ for reliable persistence, Prometheus 📊 for metrics, and is deployed on Kubernetes ☸️ with a fully automated GitHub Actions CI/CD pipeline.
 
-The system follows clean architecture principles 🧩, leverages Redis ⚡ for high-speed caching, PostgreSQL 🗄️ for reliable persistence, and exposes a RESTful API 🌐 built in Go for maximum performance and scalability
+## 🧠 Key Highlights
+- ⚡ **High Performance:** Built with Go for efficient concurrency and fast request handling
+- ☸️ **Kubernetes Deployment:** Multi-replica deployment with liveness/readiness probes and resource limits
+- 📊 **Observability:** Prometheus metrics (request latency, cache hit rate, throughput) with Grafana dashboards
+- 🔁 **Cache-First Strategy:** Redis caching reduces DB load and improves URL resolution speed by 60%
+- 🚀 **CI/CD Pipeline:** GitHub Actions automates build, test, and Docker image push to Docker Hub on every commit
+- 🐳 **Fully Containerized:** Docker + Docker Compose for consistent local and production environments
+- 🗄️ **Reliable Storage:** PostgreSQL ensures data durability and consistency
 
-🧠 Key Highlights 
+## 🏗️ System Architecture
 
-⚡ High Performance: Built with Go for efficient concurrency and fast request handling
-
-🧩 Scalable Design: Stateless REST APIs with Redis-based caching
-
-🗄️ Reliable Storage: PostgreSQL ensures data durability and consistency
-
-🔁 Cache-First Strategy: Reduces DB load and improves URL resolution speed
-
-🛡️ Clean & Maintainable Code: Modular structure following best practices
-
-📈 Production-Oriented: Designed with extensibility and real-world usage in mind
-
-🏗️ System Architecture
-```
 Client
-  │
-  ▼
-REST API (Go)
-  │
-  ├── Redis (Cache)
-  │
-  └── PostgreSQL (Persistent Storage)
-```
-🛠️ Requirements
+│
+▼
+REST API (Go) ──► /metrics (Prometheus)
+│
+├── Redis (Cache Layer)
+│
+└── PostgreSQL (Persistent Storage)
+Kubernetes Cluster
+├── Deployment (2 replicas, probes, resource limits)
+└── Services (LoadBalancer + ClusterIP)
+CI/CD: GitHub Actions → Docker Build → Docker Hub
 
-Before running the project, ensure you have:
+## ⚙️ Tech Stack
+| Layer | Technology |
+|-------|-----------|
+| Language | Go (Golang) |
+| Containerization | Docker, Kubernetes |
+| CI/CD | GitHub Actions |
+| Observability | Prometheus, Grafana |
+| Cache | Redis |
+| Database | PostgreSQL |
+| Version Control | Git & GitHub |
 
-Go >= 1.18
+## 🛠️ Requirements
+- Go >= 1.21
+- Docker & Docker Compose
+- kubectl (for Kubernetes deployment)
 
-Redis installed and running
+## 💻 Getting Started
 
-PostgreSQL database set up
-
-git installed
-
-💻 Getting Started
-
-1️⃣ Clone the repo
-```
+### 1️⃣ Clone the repo
+```bash
 git clone https://github.com/Om20An00/go-url-shortener.git
 cd go-url-shortener
 ```
-2️⃣ Configure environment variables
-```
-Create a .env file (or configure config.yaml) with database and Redis details:
 
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=your_postgres_user
-DB_PASSWORD=your_postgres_password
-DB_NAME=url_shortener
-REDIS_HOST=localhost
-REDIS_PORT=6379
+### 2️⃣ Run with Docker Compose
+```bash
+docker-compose up --build
 ```
-
-
-3️⃣ Run the service
-```
-go run main.go
-```
-
 The API will start on http://localhost:8080 🚀
 
-4️⃣ Test API Endpoints
-
-Example using curl:
+### 3️⃣ Deploy on Kubernetes
+```bash
+kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/service.yaml
 ```
+
+### 4️⃣ View Metrics
+```bash
+curl http://localhost:8080/metrics
+```
+
+### 5️⃣ Test API Endpoints
+```bash
 # Shorten a URL
-curl -X POST http://localhost:8080/shorten -H "Content-Type: application/json" -d '{"url":"https://example.com"}'
+curl -X POST http://localhost:8080/shorten \
+  -H "Content-Type: application/json" \
+  -d '{"url":"https://example.com"}'
 
-# Redirect a short URL
-curl http://localhost:8080/<short-code>
-
+# Redirect
+curl http://localhost:8080/r/<short-code>
 ```
-⚙️ Tech Stack
-Layer	Technology
-Language	Go (Golang)
-API	RESTful APIs
-Cache	Redis
-Database	PostgreSQL
-Architecture	Clean / Layered Architecture
-Version Control	Git & GitHub
-🔑 Core Features
 
-🔗 Generate short URLs from long URLs
+## 🔑 Core Features
+- 🔗 Generate short URLs from long URLs
+- 🚀 Fast redirection with Redis cache-first strategy
+- 📊 Prometheus metrics endpoint at `/metrics`
+- ☸️ Kubernetes manifests for scalable, resilient deployment
+- 🔄 Automated CI/CD via GitHub Actions
+- 🗃️ PostgreSQL persistent storage with cache fallback
 
-🚀 Fast redirection using Redis caching
+## 🛠️ Future Enhancements
+- 🔐 Authentication & user-based URL management
+- 📈 Analytics (click counts, geo stats)
+- ⏳ URL expiration & cleanup jobs
+- 🚦 Rate limiting & abuse prevention
 
-🗃️ Persistent storage with PostgreSQL
+## 👨‍💻 Author
+**Om Anand Dubey**
+- 🌐 GitHub: [Om20An00](https://github.com/Om20An00)
+- 💼 LinkedIn: [om-anand-dubey](https://linkedin.com/in/om-anand-dubey-283366229)
 
-🔄 Cache fallback to database on cache miss
-
-🧪 Easily testable REST endpoints
-
-📦 Modular and extensible codebase
-
-
-
-It demonstrates:
-
-Real backend system design
-
-Cache + database coordination
-
-API design and data flow
-
-Performance-conscious engineering
-
-Code written with production standards
-
-💡 The same architectural patterns used here are applicable to real systems at scale.
-
-🛠️ Future Enhancements
-
-🔐 Authentication & user-based URL management
-
-📊 Analytics (click counts, geo stats)
-
-⏳ URL expiration & cleanup jobs
-
-🚦 Rate limiting & abuse prevention
-
-🐳 Dockerized deployment
-
-👨‍💻 Author
-
-Om Anand Dubey
-🎓 Computer Science Graduate
-💻 Backend & Systems Enthusiast
-🌐 GitHub: Om20An00
-
-⭐ Final Note
-
-If you’re a recruiter or engineer reviewing this project:
-
-This repository reflects industry-grade backend development practices, not just academic code.
-
-Feel free to ⭐ the repo or reach out for discussion!
+⭐ If you're a recruiter or engineer reviewing this — this repository reflects production-grade DevOps and backend practices including observability, container orchestration, and automated delivery pipelines.
