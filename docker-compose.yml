@@ -4,7 +4,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - POSTGRES_DSN=postgres://postgres:Omanand%402000@postgres:5432/urlshortener?sslmode=disable
+      - POSTGRES_DSN=postgres://postgres:Password@postgres:5432/urlshortener?sslmode=disable
       - REDIS_ADDR=redis:6379
     depends_on:
       - postgres
